@@ -1,4 +1,4 @@
-//definitions by jason swearingen.  jasons aat novaleaf doot coom.  for node-htt-mitm-proxy v0.5.2.  
+//definitions by jason swearingen.  jasons aat novaleaf doot coom.  for node-htt-mitm-proxy v0.5.2.
 
  import http = require("http");
  import https = require("https");
@@ -42,9 +42,9 @@
          listen(/** An object with the following options: */ options?: IProxyOptions, callback?: Function): void;
          /** proxy.close
          Stops the proxy listening.
-        
+
          Example
-        
+
          proxy.close(); */
          close(): void;
 
@@ -87,12 +87,12 @@
  fn(ctx, err, errorKind) - The function to be called on an error.*/callback: (context: IContext, err?: Error, errorKind?: string) => void): void;
 
          /** Adds a function to get called at the beginning of a request.
-        
+
          Arguments
-        
+
          fn(ctx, callback) - The function that gets called on each request.
          Example
-        
+
          proxy.onRequest(function(ctx, callback) {
            console.log('REQUEST:', ctx.clientToProxyRequest.url);
            return callback();
@@ -103,12 +103,12 @@
 
          onRequestEnd(fcn: (ctx: IContext, callback: (error?: Error) => void) => void): void;
          /** Adds a function to get called at the beginning of the response.
-        
+
          Arguments
-        
+
          fn(ctx, callback) - The function that gets called on each response.
          Example
-        
+
          proxy.onResponse(function(ctx, callback) {
            console.log('BEGIN RESPONSE');
            return callback();
@@ -204,7 +204,7 @@
          /** filters added by .addResponseFilter() */
          responseFilters: any[];
 
-         /** undocumented, allows adjusting the request in callbacks (such as .onRequest()) before sending  upstream (to proxy or target host)..  
+         /** undocumented, allows adjusting the request in callbacks (such as .onRequest()) before sending  upstream (to proxy or target host)..
           * FYI these values seem pre-populated with defaults based on the request, you can modify them to change behavior. */
          proxyToServerRequestOptions: {
              /** ex: "GET" */
@@ -223,7 +223,11 @@
          onResponseDataHandlers:Function[];
          onResponseEndHandlers:Function[];
 
+         retryCount:number;
 
+         retryRequest(retryCount: number):void;
+
+         retriesAvailable: boolean;
 
      }
  }
